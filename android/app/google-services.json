@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "547801448158",
+    "firebase_url": "https://umc-hangout-efa93.firebaseio.com",
+    "project_id": "umc-hangout-efa93",
+    "storage_bucket": "umc-hangout-efa93.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547801448158:android:88955b54ce2ac2f6384c4f",
+        "android_client_info": {
+          "package_name": "com.example.pertemuan3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "547801448158-ub1jtje33uk6ii91l97c4pg5bbvf239j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtGhodDJusUh31qct91vk99qogGC7NPkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "547801448158-ub1jtje33uk6ii91l97c4pg5bbvf239j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
