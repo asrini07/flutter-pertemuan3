@@ -3,6 +3,8 @@ import 'package:pertemuan3/mahasiswa.dart';
 
 class CrudDialog{
   final teName = TextEditingController();
+  final teUmur = TextEditingController();
+  final teJenisKelamin = TextEditingController();
   Mahasiswa user;
 
   static const TextStyle linkStyle = const TextStyle(
@@ -15,6 +17,8 @@ Widget buildAboutDialog(BuildContext context, AddUserCallback _myHomePageState, 
   if(user != null) {
     this.user = user;
     teName.text = user.nama;
+    teUmur.text = user.umur;
+    teJenisKelamin.text = user.jenis_kelamin;
   }
 
   return new AlertDialog(
@@ -25,6 +29,8 @@ Widget buildAboutDialog(BuildContext context, AddUserCallback _myHomePageState, 
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           getTextField("Nama", teName),
+          getTextField("Umur", teUmur),
+          getTextField("Jenis Kelamin", teJenisKelamin),
           new GestureDetector(
             onTap: () => onTap(isEdit, _myHomePageState, context),
             child: new Container(
@@ -79,7 +85,7 @@ Widget getAppBorderButton(String buttonLabel, EdgeInsets margin){
 }
 
 Mahasiswa getData(bool isEdit){
-  return new Mahasiswa(isEdit ? user.id: "", teName.text);
+  return new Mahasiswa(isEdit ? user.id: "", teName.text, teUmur.text, teJenisKelamin.text);
 }
 
 

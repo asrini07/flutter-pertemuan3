@@ -114,6 +114,20 @@ class _MyHomePageState extends State<Beranda> implements AddUserCallback {
                           color: Colors.lightBlueAccent
                         ),
                       ),
+                      new Text(
+                        user.umur,
+                        style: new TextStyle(
+                          fontSize: 20.0, 
+                          color: Colors.lightBlueAccent
+                        ),
+                      ),
+                      new Text(
+                        user.jenis_kelamin,
+                        style: new TextStyle(
+                          fontSize: 20.0, 
+                          color: Colors.lightBlueAccent
+                        ),
+                      ),
                     ],
                   ),
                 ),

@@ -85,7 +85,9 @@ class DatabaseCrud {
 
     if(transactionResult.committed){
       _userRef.push().set(<String, String>{
-        "nama": "" + user.nama
+        "nama": "" + user.nama,
+        "umur": "" + user.umur,
+        "jenis_kelamin": "" + user.jenis_kelamin
       }).then((_) {
         print('Transaction comitted');
       });
@@ -100,7 +102,9 @@ class DatabaseCrud {
   //UPDATE USER
   void updateUser(Mahasiswa user) async {
     await _userRef.child(user.id).update({
-      "nama": "" + user.nama
+      "nama": "" + user.nama,
+      "umur": "" + user.umur,
+      "jenis_kelamin": "" + user.jenis_kelamin
     }).then((_) {
       print('Transaction Commited');
     });
