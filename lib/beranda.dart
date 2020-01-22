@@ -1,22 +1,32 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
-import 'package:pertemuan3/Mahasiswa.dart';
+import 'package:pertemuan3/mahasiswa.dart';
 import 'package:pertemuan3/database_crud.dart';
+import 'package:pertemuan3/crud_dialog.dart';
 
 class Beranda extends StatefulWidget {
   @override
   _MyHomePageState createState() => new _MyHomePageState();
 }
 
-class _MyHomePageState extends State<Beranda>{
+class _MyHomePageState extends State<Beranda> implements AddUserCallback {
+  
   bool _anchorToBottom = false;
   DatabaseCrud databaseUtil;
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return null;
-  // }
+  @override
+  void initState(){
+    super.initState();
+    databaseUtil = new DatabaseCrud();
+    databaseUtil.initState();
+  }
+
+  @override
+  void dispose(){
+    super.dispose();
+    databaseUtil.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +57,7 @@ class _MyHomePageState extends State<Beranda>{
             Icons.group_add,
             color: Colors.white,
           ),
-          onPressed: () => null,
+          onPressed: () => showEditWidget(null, false),
         ),
       ];
     }
@@ -62,7 +72,9 @@ class _MyHomePageState extends State<Beranda>{
         key: new ValueKey<bool>(_anchorToBottom),
         query: databaseUtil.getUser(),
         reverse: _anchorToBottom,
-        sort: _anchorToBottom ? (DataSnapshot a, DataSnapshot b) => b.key.compareTo(a.key) : null,
+        sort: _anchorToBottom 
+              ? (DataSnapshot a, DataSnapshot b) => b.key.compareTo(a.key) 
+              : null,
         itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
                     return new SizeTransition(
@@ -75,27 +87,6 @@ class _MyHomePageState extends State<Beranda>{
 
   }
 
-
-@override
-void dispose(){
-  super.dispose();
-  databaseUtil.dispose();
-}
-
-@override
-void initState(){
-  super.initState();
-  databaseUtil = new DatabaseCrud();
-  databaseUtil.initState();
-}
-
-  String getShortName(Mahasiswa user) {
-    String shortName = "";
-    if (!user.nama.isEmpty) {
-      shortName = user.nama.substring(0, 1);
-    }
-    return shortName;
-  }
 
   Widget showUser(DataSnapshot res) {
     Mahasiswa user = Mahasiswa.fromSnapshot(res);
@@ -135,13 +126,13 @@ void initState(){
                       Icons.edit,
                       color: const Color(0xFF167F67),
                     ),
-                    onPressed: () => null,
+                    onPressed: () => showEditWidget(user, true),
                   ),
                   new IconButton(
                     icon: const Icon(
                       Icons.delete_forever,
                       color: const Color(0xFF167F67)),
-                      onPressed: () => null,
+                      onPressed: () => deleteUser(user),
                     ),
                 ],
               )
@@ -155,9 +146,45 @@ void initState(){
 
   }
 
-  
 
+  String getShortName(Mahasiswa user) {
+    String shortName = "";
+    if (!user.nama.isEmpty) {
+      shortName = user.nama.substring(0, 1);
+    }
+    return shortName;
+  }
 
+  deleteUser(Mahasiswa user){
+    setState((){
+      databaseUtil.deleteUser(user);
+    });
+  }
+
+  showEditWidget(Mahasiswa user, bool isEdit){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) =>
+          new CrudDialog().buildAboutDialog(context, this, isEdit, user),
+    );
+
+  }
+
+ 
+
+  @override
+  void addUser(Mahasiswa user){
+    setState((){
+      databaseUtil.addUser(user);
+    });
+  }
+
+  @override
+  void update(Mahasiswa user){
+    setState((){
+      databaseUtil.updateUser(user);
+    });
+  }
   
 }
 

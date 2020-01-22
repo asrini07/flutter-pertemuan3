@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
 //import 'package:firebase_database/ui/utils/stream_subscriber_mixin.dart';
-import 'package:pertemuan3/Mahasiswa.dart';
+import 'package:pertemuan3/mahasiswa.dart';
 
 class DatabaseCrud {
   DatabaseReference _counterRef;
@@ -68,40 +68,34 @@ class DatabaseCrud {
     return _userRef;
   }
 
-  void dispose(){
-    _messagesSubscription.cancel();
-    _counterSubscription.cancel();
+    // //DELETE USER
+  void deleteUser(Mahasiswa user) async {
+    await _userRef.child(user.id).remove().then((_){
+      print("Trancaction comitted");
+    });
   }
 
-
-  // //DELETE USER
-  // void deleteUser(Mahasiswa user) async {
-  //   await _userRef.child(user.id).remove().then((_){
-  //     print("Trancaction comitted");
-  //   });
-  // }
-
   //ADD USER
-  // void addUser(Mahasiswa user) async {
-  //   final TransactionResult transactionResult=
-  //   await _counterRef.runTransaction((MutableData mutableData) async {
-  //     mutableData.value = (mutableData.value ?? 0) + 1;
-  //     return mutableData; 
-  //   });
+  addUser(Mahasiswa user) async {
+    final TransactionResult transactionResult=
+    await _counterRef.runTransaction((MutableData mutableData) async {
+      mutableData.value = (mutableData.value ?? 0) + 1;
+      return mutableData; 
+    });
 
-  //   if(transactionResult.committed){
-  //     _userRef.push().set(<String, String>{
-  //       "nama": "" + user.nama
-  //     }).then((_) {
-  //       print('Transaction comitted');
-  //     });
-  //   } else {
-  //     print('Transaction mot commited');
-  //     if(transactionResult.error != null){
-  //       print(transactionResult.error.message);
-  //     }
-  //   }
-  // }
+    if(transactionResult.committed){
+      _userRef.push().set(<String, String>{
+        "nama": "" + user.nama
+      }).then((_) {
+        print('Transaction comitted');
+      });
+    } else {
+      print('Transaction mot commited');
+      if(transactionResult.error != null){
+        print(transactionResult.error.message);
+      }
+    }
+  }
 
   //UPDATE USER
   void updateUser(Mahasiswa user) async {
@@ -112,6 +106,16 @@ class DatabaseCrud {
     });
   }
 
+
+  void dispose(){
+    _messagesSubscription.cancel();
+    _counterSubscription.cancel();
+  }
+
+
+
+
+  
 
 
 
