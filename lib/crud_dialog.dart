@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pertemuan3/mahasiswa.dart';
 
 class CrudDialog{
@@ -29,7 +30,7 @@ Widget buildAboutDialog(BuildContext context, AddUserCallback _myHomePageState, 
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           getTextField("Nama", teName),
-          getTextField("Umur", teUmur),
+          getNumberField("Umur", teUmur),
           getTextField("Jenis Kelamin", teJenisKelamin),
           new GestureDetector(
             onTap: () => onTap(isEdit, _myHomePageState, context),
@@ -59,6 +60,25 @@ Widget getTextField(String inputBoxName, TextEditingController inputBoxControlle
   );
   return loginBtn;
 }
+
+Widget getNumberField(String inputBoxName, TextEditingController inputBoxController) {
+  var loginBtn = new Padding(
+    padding:  const EdgeInsets.all(5.0),
+    child: new TextField(
+              controller: inputBoxController,
+              decoration: new InputDecoration(
+              hintText: inputBoxName,
+            ),
+            keyboardType: TextInputType.number,
+            inputFormatters: <TextInputFormatter>[
+                WhitelistingTextInputFormatter.digitsOnly
+            ],
+          ),
+  );
+  return loginBtn;
+}
+
+
 
 
 Widget getAppBorderButton(String buttonLabel, EdgeInsets margin){
