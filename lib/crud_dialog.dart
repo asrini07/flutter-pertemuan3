@@ -7,17 +7,7 @@ class CrudDialog{
   final teUmur = TextEditingController();
   final teJenisKelamin = TextEditingController();
   Mahasiswa user;
-
-  int _rgProgramming = -1;
-  String _selectedValue;
-
-  final List<RadioGroup> _programmingList = [
-    RadioGroup(index: 1, text: "Kotlin"),
-    RadioGroup(index: 2, text: "Swift"),
-    RadioGroup(index: 3, text: "Flutter"),
-    RadioGroup(index: 4, text: "Java"),
-    RadioGroup(index: 5, text: "React Native"),
-  ];
+  
 
   static const TextStyle linkStyle = const TextStyle(
     color: Colors.blue,
@@ -67,6 +57,7 @@ Widget getTextField(String inputBoxName, TextEditingController inputBoxControlle
       decoration: new InputDecoration(
         hintText: inputBoxName,
       ),
+      
       ),
   );
   return loginBtn;
@@ -88,78 +79,6 @@ Widget getNumberField(String inputBoxName, TextEditingController inputBoxControl
   );
   return loginBtn;
 }
-
-
-Widget getRadioField(String inputBoxName, TextEditingController inputBoxController) {
-  var loginBtn = new Padding(
-    padding:  const EdgeInsets.all(5.0),
-    child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text("Apa bahasa pemrograman yang kamu suka ?"),
-            _buildRadioButton(),
-            Text("Kamu menyukai pemrograman :"),
-            SizedBox(height: 8.0,),
-            Center(
-              child: Text(
-                _selectedValue == null ? "Belum memilih" : _selectedValue,
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold
-                ),
-              ),
-            ),
-          ],
-        ),
-    // child: 
-    //  _programmingList.map((programming) => RadioListTile(
-    //     title: Text(programming.text),
-    //     value: programming.index,
-    //     groupValue: _rgProgramming,
-    //     controlAffinity: ListTileControlAffinity.trailing,
-    //     dense: true,
-    //     onChanged: (value) {
-    //       setState(() {
-    //         _rgProgramming = value;
-    //         _selectedValue = programming.text;
-    //       });
-    //     },
-    //   )).toList(),
-    // new TextField(
-    //           controller: inputBoxController,
-    //           decoration: new InputDecoration(
-    //           hintText: inputBoxName,
-    //         ),
-    //         keyboardType: TextInputType.number,
-    //         inputFormatters: <TextInputFormatter>[
-    //             WhitelistingTextInputFormatter.digitsOnly
-    //         ],
-    //       ),
-  );
-  return loginBtn;
-}
-
-
-Widget _buildRadioButton() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: _programmingList.map((programming) => RadioListTile(
-        title: Text(programming.text),
-        value: programming.index,
-        groupValue: _rgProgramming,
-        controlAffinity: ListTileControlAffinity.trailing,
-        dense: true,
-        onChanged: (value) {
-          setState(() {
-            _rgProgramming = value;
-            _selectedValue = programming.text;
-          });
-        },
-      )).toList(),
-    );
-  }
-}
-
 
 Widget getAppBorderButton(String buttonLabel, EdgeInsets margin){
   var loginBtn = new Container(
@@ -199,12 +118,6 @@ onTap(bool isEdit, AddUserCallback _myHomePageState, BuildContext context){
 
   Navigator.of(context).pop();
 }
-
-
-class RadioGroup {
-  final int index;
-  final String text;
-  RadioGroup({this.index, this.text});
 }
 
 abstract class AddUserCallback{

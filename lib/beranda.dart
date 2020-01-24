@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -54,10 +56,11 @@ class _MyHomePageState extends State<Beranda> implements AddUserCallback {
       return <Widget>[
         new IconButton(
           icon: const Icon(
-            Icons.group_add,
+            Icons.close,
             color: Colors.white,
           ),
-          onPressed: () => showEditWidget(null, false),
+         // onPressed: () => showEditWidget(null, false),
+          onPressed: ()=> exit(0),
         ),
       ];
     }
@@ -82,7 +85,71 @@ class _MyHomePageState extends State<Beranda> implements AddUserCallback {
                       child: showUser(snapshot),
                     );
                   },
+         //child:             new Container(
+  //   decoration: BoxDecoration(
+  //     borderRadius: BorderRadius.all(Radius.circular(55)),
+  //   ),
+  //   width: double.infinity,
+  //   height: 60.0,
+  //   child: FlatButton(
+  //     color: Color(0xffFEA134),
+  //     textColor: Colors.white,
+  //     padding: EdgeInsets.all(8.0),
+  //     onPressed: () => showEditWidget(null, false),
+  //     child: Text(
+  //       "Add Data User",
+  //       style: TextStyle(fontSize: 20.0),
+  //     ),
+  //   ),
+  // ),
+
+
+  
       ),
+      //child:             new Container(
+  //   decoration: BoxDecoration(
+  //     borderRadius: BorderRadius.all(Radius.circular(55)),
+  //   ),
+  //   width: double.infinity,
+  //   height: 60.0,
+  //   child: FlatButton(
+  //     color: Color(0xffFEA134),
+  //     textColor: Colors.white,
+  //     padding: EdgeInsets.all(8.0),
+  //     onPressed: () => showEditWidget(null, false),
+  //     child: Text(
+  //       "Add Data User",
+  //       style: TextStyle(fontSize: 20.0),
+  //     ),
+  //   ),
+  // ),
+
+// bottomNavigationBar: BottomNavigationBar(
+//           items: const <BottomNavigationBarItem>[
+//             BottomNavigationBarItem(
+//               icon: Icon(Icons.home),
+//               title: Text("Home"),
+//             ),
+//             BottomNavigationBarItem(
+//               icon: Icon(Icons.people),
+//               title: Text("Profile"),
+//             ),
+//           ],
+//           backgroundColor: Colors.deepOrange,
+//           selectedItemColor: Colors.white,
+//           unselectedItemColor: Colors.black,
+//         ),
+
+
+      floatingActionButton: FloatingActionButton(
+        onPressed:  () => showEditWidget(null, false),
+        //tooltip: 'Increment',
+        //title: Text("Home"),
+        child: Icon(Icons.add),
+        backgroundColor: Colors.blue,
+      ), 
+      backgroundColor: Colors.grey,
+      
     );
 
   }
@@ -138,22 +205,49 @@ class _MyHomePageState extends State<Beranda> implements AddUserCallback {
                   new IconButton(
                     icon: const Icon(
                       Icons.edit,
-                      color: const Color(0xFF167F67),
+                      color: const Color(0xFFFDD835),
                     ),
                     onPressed: () => showEditWidget(user, true),
                   ),
                   new IconButton(
                     icon: const Icon(
                       Icons.delete_forever,
-                      color: const Color(0xFF167F67)),
+                      color: const Color(0xFFD32F2F)),
                       onPressed: () => deleteUser(user),
                     ),
+                  
+  
                 ],
-              )
+              ),
+
+  //             new Container(
+  //   decoration: BoxDecoration(
+  //     borderRadius: BorderRadius.all(Radius.circular(55)),
+  //   ),
+  //   width: double.infinity,
+  //   height: 60.0,
+  //   child: FlatButton(
+  //     color: Color(0xffFEA134),
+  //     textColor: Colors.white,
+  //     padding: EdgeInsets.all(8.0),
+  //     onPressed: () => showEditWidget(null, false),
+  //     child: Text(
+  //       "Add Data User",
+  //       style: TextStyle(fontSize: 20.0),
+  //     ),
+  //   ),
+  // )
+
+
+
+
             ],
+          ),
+
+        ),
+        padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0)
       ),
-    ),
-    padding: const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0)),
+    
     );
      
     return item;
